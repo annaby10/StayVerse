@@ -1,37 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WanderLust</title>
-  </head>
-  <body>
-    <h3>Create a New Listing</h3>
-    <form method="POST" action="/listings">
-      <input name="listing[title]" placeholder="enter title" type="text" />
-      <br /><br />
-      <textarea
-        name="listing[description]"
-        placeholder="enter description"
-      ></textarea>
-      <br /><br />
-      <input
-        name="listing[image]"
-        placeholder="enter image URL/Link"
-        type="text"
-      />
-      <br /><br />
-      <input name="listing[price]" placeholder="enter price" type="number" />
-      <br /><br />
-      <input name="listing[country]" placeholder="enter country" type="text" />
-      <br /><br />
-      <input
-        name="listing[location]"
-        placeholder="enter location"
-        type="text"
-      />
-      <br /><br />
-      <button>Add</button>
+<% layout('/layouts/boilerplate.ejs') -%>
+<body>
+
+    <div class="row">
+        <div class="col-8 offset-2 mt-4">
+
+    <h3>Add New Listing</h3>
+    <form  action="/listings" method="post" class="needs-validation" novalidate enctype="multipart/form-data">  
+
+        <div class="mb-3 mt-4">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="listing[title]" placeholder="Home Title" class="form-control" required>
+            <div class="invalid-feedback">Add Catchy Title</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" placeholder="Home description" class="form-control" required></textarea>
+            <div class="invalid-feedback">Add Short Description</div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload Listing Image</label>
+            <input type="file" name="listing[image]" placeholder="Home Image URL/Link" class="form-control" required>
+            <div class="valid-feedback">Image Look's Good</div>
+        </div>
+
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="listing[price]" placeholder="15,000" class="form-control" required>
+                <div class="invalid-feedback">Add Valid Price</div>
+            </div>
+
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="listing[country]" placeholder="Pakistan" class="form-control" required>
+                <div class="invalid-feedback">Invalid Country Name</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="listing[location]" placeholder="DHA Phase II, Karachi"  class="form-control" required>
+            <div class="invalid-feedback">Invalid Location</div>
+        </div>
+
+        <button class="btn btn-dark mb-4 mt-3 add-btn">Add</button>
     </form>
-  </body>
-</html>
+
+
+</div>
+</div>
+</body>
