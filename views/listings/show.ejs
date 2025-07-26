@@ -1,29 +1,62 @@
 <% layout('/layouts/boilerplate.ejs') -%>
-    <div class="row mt-3">
-        <div class="col-8 offset-2">
-          <h3>Listing Details</h3>
-         </div>
-<!-- bootstrap 5 Card -->
-    <div class="card col-6 offset-3 show-card mt-2 listing-card">
-        <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="<%=listing.image.filename%>">
-        <div class="card-body mt-3">
-            <p class="card-text">
-            <b><%= listing.title %></b><br/>
-            <%=listing.description%><br/>            
-            &#8377; <%=listing.price.toLocaleString("en-IN")%> <br/>
-            <%=listing.location%> <br/>
-            <%=listing.country%>
-            </p>
-      
-        </div>
-      </div>
 
-      <div class="btns">
-        <a href="/listings/<%=listing._id%>/edit%>" class="btn btn-dark col-1 offset-3 add-btn">Edit</a>
+<div class="row mt-3">
+  <div class="col-8 offset-2">
+    <h3><%= listing.title %></h3>
+  </div>
 
-    <!-- DeletePath -->
-        <form action="/listings/<%=listing._id%>?_method=Delete" method="post">
-            <button class="btn btn-dark offset-5">Delete</button>
-        </form>
-     </div>
-</html>
+  <!-- Bootstrap 5 Card -->
+  <div class="card col-6 offset-3 show-card mt-2 listing-card">
+    <% if (listing.image && listing.image.url) { %>
+      <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="<%= listing.image.filename || 'Listing Image' %>">
+    <% } else { %>
+      <img src="/images/default.jpg" class="card-img-top show-img" alt="Default Image">
+    <% } %>
+    <div class="card-body mt-3">
+      <p class="card-text">
+        <%= listing.description %><br>
+        &#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
+        <%= listing.location %> <br>
+        <%= listing.country %>
+      </p>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="col-8 offset-2 mt-3 d-flex justify-content-start gap-3">
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">Edit</a>
+
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" class="d-inline">
+      <button type="submit" class="btn btn-dark">Delete</button>
+    </form>
+  </div>
+
+  <!-- Review Form (Always visible) -->
+<div class="col-8 offset-3 mb-5">
+  <hr>
+  <h4 class="mb-3">Leave a Review</h4>
+
+  <form action="/listings/<%= listing._id %>/reviews" method="POST">
+    <!-- ⭐ Rating Input -->
+    <div class="mb-4">
+      <label for="rating" class="form-label fw-bold">Rating (1 to 5):</label>
+      <input type="range" name="review[rating]" id="rating" min="1" max="5" class="form-range" required>
+    </div>
+
+    <!-- 💬 Comment Box -->
+    <div class="mb-4">
+      <label for="comment" class="form-label fw-bold">Your Comment:</label>
+      <textarea 
+        name="review[comment]"
+        id="comment"
+        rows="4"
+        class="form-control"
+        placeholder="Write your review here..."
+        required
+      ></textarea>
+    </div>
+
+    <!-- ✅ Submit Button -->
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+  </form>
+</div>

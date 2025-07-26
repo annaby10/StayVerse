@@ -39,6 +39,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: space-evenly;
+    margin-top: auto;
 }
 
 .f-info-links,.f-info-socials,.f-info-brand{
@@ -92,4 +93,16 @@ body {
 .add-btn {
   background-color: #fe424d !important;
   border: none !important;
+}
+
+.show-img {
+  height: 30vh;
+}
+.btns {
+  display: flex;
+  margin-bottom: 2.5rem;
+}
+.show-card {
+  padding-left: 0;
+  padding-right: 0;
 }
